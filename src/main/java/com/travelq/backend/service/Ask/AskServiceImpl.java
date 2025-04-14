@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -53,8 +53,9 @@ public class AskServiceImpl implements AskService {
     public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createPost(AskCreateDTO askCreateDTO) {
         try {
             // 회원 ID 체크. ID가 없거나 잘못된 ID면 400 에러 리턴
-            if (askCreateDTO.getMemberId() == null || memberRepository.findById(askCreateDTO.getMemberId()).isEmpty()) {
-                log.info("질문 게시글 등록 실패!! : 회원 아이디가 잘못 되었습니다.");
+            Optional<Member> member = memberRepository.findById(askCreateDTO.getMemberId());
+            if (askCreateDTO.getMemberId() == null || member.isEmpty()) {
+                log.error("질문 게시글 등록 실패!! : 회원 아이디가 잘못 되었습니다.");
                 ApiResponseDTO<AskCreateDTO> response = ApiResponseDTO.<AskCreateDTO>builder()
                         .success(false)
                         .message("존재하지 않는 회원입니다")
@@ -64,12 +65,11 @@ public class AskServiceImpl implements AskService {
             // 회원 ID 인증 완료. 게시물 등록 시작
             log.info("질문 게시글 등록 시작!!");
 
-            Member member = memberRepository.findById(askCreateDTO.getMemberId()).orElse(null);
             Ask newAskPost = Ask.builder()
-                    .member(member)
+                    .member(member.get())
                     .title(askCreateDTO.getTitle())
                     .content(askCreateDTO.getContent())
-                    .author(member.getNickName())
+                    .author(member.get().getNickName())
                     .state("00")
                     .viewCount(0)
                     .reportCount(0)
@@ -87,6 +87,8 @@ public class AskServiceImpl implements AskService {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
+
+            log.error("에러 발생!! \n 에러 내용 : {}", e.getMessage());
 
             ApiResponseDTO<AskCreateDTO> errorResponse = ApiResponseDTO.<AskCreateDTO>builder()
                     .success(false)
