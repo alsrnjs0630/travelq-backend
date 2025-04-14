@@ -1,8 +1,15 @@
 package com.travelq.backend.dto.common;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class PageDTO<E, S> implements Serializable {
     private static final long serialVersionUID = 1L;
 

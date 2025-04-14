@@ -1,5 +1,6 @@
 package com.travelq.backend.dto.Ask;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.travelq.backend.entity.Member;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class AskResponseDTO implements Serializable {
     private Long id;
 
     // 회원 아이디
-    private Member member;
+    private Long memberId;
 
     // 게시글 제목
     private String title;

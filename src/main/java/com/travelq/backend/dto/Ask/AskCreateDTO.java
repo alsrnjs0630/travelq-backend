@@ -17,7 +17,7 @@ public class AskCreateDTO implements Serializable {
     // 질문 게시글 등록 DTO
 
     // 회원 아이디
-    private Member member;
+    private Long memberId;
 
     // 게시글 제목
     private String title;
