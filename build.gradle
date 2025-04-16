@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     /*implementation 'org.springframework.boot:spring-boot-starter-security'*/ // 시큐리티는 로그인 기능 구현 할 때 활성화
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // Mapstruct

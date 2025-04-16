@@ -1,5 +1,7 @@
 package com.travelq.backend.entity;
 
+import com.travelq.backend.util.StatusCode;
+import com.travelq.backend.util.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,8 +51,9 @@ public class Recommend {
     private int viewCount;
 
     // 게시글 상태(00 = 정상, 01 = 삭제, 02 = 신고)
+    @Convert(converter = StatusConverter.class)
     @Column(name = "state", nullable = false)
-    private String state;
+    private StatusCode state;
 
     // 등록일
     @CreationTimestamp
@@ -96,7 +99,7 @@ public class Recommend {
         this.viewCount = viewCount;
     }
     // 글 상태 수정
-    public void updateState(String state) {
+    public void updateState(StatusCode state) {
         this.state = state;
     }
 }

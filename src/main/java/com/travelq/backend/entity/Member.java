@@ -1,5 +1,7 @@
 package com.travelq.backend.entity;
 
+import com.travelq.backend.util.StatusCode;
+import com.travelq.backend.util.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -48,9 +50,10 @@ public class Member {
     @Column(name = "email", nullable = false, length = 255, unique = true)
     private String email;
 
-    // 회원상태 (00 = 정상, 01 = 정지)
+    // 회원상태 (00 = 정상, 01 = 삭제(탈퇴), 02 = 신고(정지))
+    @Convert(converter = StatusConverter.class)
     @Column(name = "member_state", nullable = false, length = 2)
-    private String memberState;
+    private StatusCode memberState;
 
     // 신고 수
     @Column(name = "report_count", nullable = false)
@@ -84,7 +87,7 @@ public class Member {
     }
 
     // 회원 상태 변경
-    public void updateMemberState(String memberState) {
+    public void updateMemberState(StatusCode memberState) {
         this.memberState = memberState;
     }
 }
