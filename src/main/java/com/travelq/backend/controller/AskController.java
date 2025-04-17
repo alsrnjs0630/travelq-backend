@@ -49,7 +49,7 @@ public class AskController {
     }
 
     // 게시글 삭제
-    @PatchMapping("/{askId}")
+    @DeleteMapping("/{askId}")
     public ResponseEntity<ApiResponseDTO<?>> deleteAskPost(@PathVariable Long askId) throws IOException {
         log.info("질문 게시글 삭제----------------------------------------------------------");
         return askService.deletePost(askId);
