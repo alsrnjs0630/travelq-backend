@@ -11,9 +11,9 @@ import com.travelq.backend.mapper.AskMapper;
 import com.travelq.backend.mapper.PageMapper;
 import com.travelq.backend.repository.AskRepository;
 import com.travelq.backend.repository.MemberRepository;
-import com.travelq.backend.util.PostSearchSpecs;
-import com.travelq.backend.util.PostSpecs;
-import com.travelq.backend.util.StatusCode;
+import com.travelq.backend.util.search.PostSearchSpecs;
+import com.travelq.backend.util.search.PostSpecs;
+import com.travelq.backend.util.commonCode.StatusCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +24,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -86,7 +83,7 @@ public class AskServiceImpl implements AskService {
                     .data(askCreateDTO)
                     .build();
 
-            return ResponseEntity.ok(response);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
         } catch (Exception e) {
           throw new RuntimeException("게시글 등록 중 알 수 없는 오류가 발생했습니다 :" + e.getMessage());

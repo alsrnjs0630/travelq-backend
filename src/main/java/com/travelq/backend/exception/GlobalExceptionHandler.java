@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,5 +45,13 @@ public class GlobalExceptionHandler {
         log.error("서비스 중 서버 에러 발생 : {}", e.getMessage());
         ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // OAuth2 로그인 에러
+    @ExceptionHandler(OAuth2AuthenticationException.class)
+    public ResponseEntity<ApiResponseDTO<?>> handleOAuth2AuthenticationException(OAuth2AuthenticationException e) {
+        log.error("로그인 중 에러 발생 : {}", e.getMessage());
+        ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
     }
 }

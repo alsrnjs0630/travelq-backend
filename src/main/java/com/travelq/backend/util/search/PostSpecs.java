@@ -1,4 +1,4 @@
-package com.travelq.backend.util;
+package com.travelq.backend.util.search;
 
 import org.springframework.data.jpa.domain.Specification;
 

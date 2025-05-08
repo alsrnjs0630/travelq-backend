@@ -1,7 +1,7 @@
 package com.travelq.backend.entity;
 
-import com.travelq.backend.util.StatusCode;
-import com.travelq.backend.util.StatusConverter;
+import com.travelq.backend.util.commonCode.StatusCode;
+import com.travelq.backend.util.commonCode.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

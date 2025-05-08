@@ -3,6 +3,7 @@ package com.travelq.backend.repository;
 import com.travelq.backend.entity.Ask;
 import com.travelq.backend.entity.AskCmt;
 import com.travelq.backend.entity.Member;
+import com.travelq.backend.util.commonCode.StatusCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ public class AskCmtRepositoryTest {
                 .author(member.getNickName())
                 .content("일본 날씨 괜찮나요!?")
                 .reportCount(0)
-                .state("00")
+                .state(StatusCode.NORMAL)
                 .build();
 
         askCmtRepository.save(askCmt);

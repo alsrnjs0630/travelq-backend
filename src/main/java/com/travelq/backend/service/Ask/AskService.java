@@ -6,7 +6,7 @@ import com.travelq.backend.dto.Ask.AskResponseDTO;
 import com.travelq.backend.dto.Ask.AskUpdateDTO;
 import com.travelq.backend.dto.common.ApiResponseDTO;
 import com.travelq.backend.dto.common.PageDTO;
-import com.travelq.backend.util.PostSearchSpecs;
+import com.travelq.backend.util.search.PostSearchSpecs;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 

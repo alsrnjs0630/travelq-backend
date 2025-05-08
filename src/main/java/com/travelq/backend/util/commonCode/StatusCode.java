@@ -1,4 +1,4 @@
-package com.travelq.backend.util;
+package com.travelq.backend.util.commonCode;
 
 import lombok.Getter;
 

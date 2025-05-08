@@ -5,9 +5,8 @@ import com.travelq.backend.dto.Ask.AskResponseDTO;
 import com.travelq.backend.dto.Ask.AskUpdateDTO;
 import com.travelq.backend.dto.common.ApiResponseDTO;
 import com.travelq.backend.dto.common.PageDTO;
-import com.travelq.backend.entity.Ask;
 import com.travelq.backend.service.Ask.AskService;
-import com.travelq.backend.util.PostSearchSpecs;
+import com.travelq.backend.util.search.PostSearchSpecs;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/ask")
+@RequestMapping("/api/asks")
 public class AskController {
     private final AskService askService;
 

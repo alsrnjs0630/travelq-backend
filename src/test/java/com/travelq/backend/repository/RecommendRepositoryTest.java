@@ -2,6 +2,7 @@ package com.travelq.backend.repository;
 
 import com.travelq.backend.entity.Member;
 import com.travelq.backend.entity.Recommend;
+import com.travelq.backend.util.commonCode.StatusCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class RecommendRepositoryTest {
                     .likeCount(0)
                     .reportCount(0)
                     .viewCount(0)
-                    .state("00")
+                    .state(StatusCode.NORMAL)
                     .build();
 
             recommendRepository.save(recommend);

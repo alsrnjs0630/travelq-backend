@@ -1,7 +1,7 @@
 package com.travelq.backend.entity;
 
-import com.travelq.backend.util.StatusCode;
-import com.travelq.backend.util.StatusConverter;
+import com.travelq.backend.util.commonCode.StatusCode;
+import com.travelq.backend.util.commonCode.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -69,6 +69,10 @@ public class Member {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    // 회원 권한
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<MemberRole> memberRoles;
+
     // 좋아요
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PostLike> likes;
@@ -89,5 +93,11 @@ public class Member {
     // 회원 상태 변경
     public void updateMemberState(StatusCode memberState) {
         this.memberState = memberState;
+    }
+
+    // 권한 등록
+    public void addRole(MemberRole memberRole) {
+        memberRoles.add(memberRole);
+        memberRole.setMember(this);
     }
 }

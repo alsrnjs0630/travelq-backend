@@ -3,6 +3,7 @@ package com.travelq.backend.repository;
 import com.travelq.backend.entity.Member;
 import com.travelq.backend.entity.Recommend;
 import com.travelq.backend.entity.RecommendCmt;
+import com.travelq.backend.util.commonCode.StatusCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class RecommendCmtRepositoryTest {
                 .author("게스트123")       // 실제 코드에선 로그인한 사용자의 정보를 가져와서 nickName이 들어감
                 .content("상하이 정말 깨끗한가요? 한 번 가보고싶네요!")
                 .reportCount(0)
-                .state("00")
+                .state(StatusCode.NORMAL)
                 .build();
         recommendCmtRepository.save(recommendCmt);
     }

@@ -2,6 +2,7 @@ package com.travelq.backend.repository;
 
 import com.travelq.backend.entity.Ask;
 import com.travelq.backend.entity.Member;
+import com.travelq.backend.util.commonCode.StatusCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class AskRepositoryTest {
                     .content("질문 게시글 테스트 내용입니다. ")
                     .reportCount(0)
                     .viewCount(0)
-                    .state("00")
+                    .state(StatusCode.NORMAL)
                     .build();
 
             askRepository.save(ask);
@@ -65,7 +66,7 @@ public class AskRepositoryTest {
         // 게시물 수정
         ask.updateTitle("후쿠오카 지금 덥나요?");
         ask.updateContent("제목이 곧 내용입니다. 제곧내");
-        ask.updateState("01");
+        ask.updateState(StatusCode.DELETED);
         askRepository.save(ask);
 
     }
