@@ -1,6 +1,7 @@
 package com.travelq.backend.exception;
 
 import com.travelq.backend.dto.common.ApiResponseDTO;
+import io.jsonwebtoken.JwtException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -51,6 +52,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(OAuth2AuthenticationException.class)
     public ResponseEntity<ApiResponseDTO<?>> handleOAuth2AuthenticationException(OAuth2AuthenticationException e) {
         log.error("로그인 중 에러 발생 : {}", e.getMessage());
+        ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
+    }
+
+    // JWT 관련 에러
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<ApiResponseDTO<?>> handleJwtException(JwtException e) {
+        log.error("JWT 에러 발생 : {}", e.getMessage());
         ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
     }
