@@ -22,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,10 +56,12 @@ public class AskServiceImpl implements AskService {
 
     // 게시판 등록
     @Override
-    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createPost(AskCreateDTO askCreateDTO) {
+    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createPost(AskCreateDTO askCreateDTO, Authentication authentication) {
         try {
+            String username = authentication.getName();
+            log.info("현재 사용자 이메일 : {}", username);
             // 회원 ID 체크. ID가 없거나 잘못된 ID면 400 에러 리턴
-            Member member = memberRepository.findById(askCreateDTO.getMemberId())
+            Member member = memberRepository.findByEmail(username)
                     .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
 
             // 회원 ID 인증 완료. 게시물 등록 시작

@@ -16,10 +16,6 @@ public class AskCreateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // 질문 게시글 등록 DTO
-
-    // 회원 아이디
-    private Long memberId;
-
     // 게시글 제목
     @NotBlank(message = "제목을 입력해주세요")
     private String title;

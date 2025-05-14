@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -35,9 +36,9 @@ public class AskController {
 
     // 게시글 등록
     @PostMapping("/")
-    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createAskPost(@RequestBody @Valid AskCreateDTO askCreateDTO) throws IOException {
+    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createAskPost(@RequestBody @Valid AskCreateDTO askCreateDTO, Authentication authentication) throws IOException {
         log.info("질문 게시글 등록----------------------------------------------------------");
-        return askService.createPost(askCreateDTO);
+        return askService.createPost(askCreateDTO, authentication);
     }
 
     // 게시판 수정

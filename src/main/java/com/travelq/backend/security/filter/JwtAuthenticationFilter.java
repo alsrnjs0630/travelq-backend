@@ -46,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         // 인증 객체 저장
                         SecurityContextHolder.getContext().setAuthentication(authentication);
+                        log.info("JWT 인증 성공");
                     }
                 } else {
                     throw new JwtException("토큰이 만료되었습니다.");
