@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -50,6 +52,10 @@ public class Ask {
     @Column(name = "state", nullable = false)
     private StatusCode state;
 
+    // 질문 게시글 댓글
+    @OneToMany(mappedBy = "ask", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<AskCmt> askCmts = new ArrayList<AskCmt>();
+
     // 등록일
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -81,4 +87,6 @@ public class Ask {
     public void updateState(StatusCode state) {
         this.state = state;
     }
+    // 댓글 작성
+    public void createCmt(AskCmt askCmt) { this.askCmts.add(askCmt); }
 }

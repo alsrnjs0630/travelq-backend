@@ -17,10 +17,16 @@ import java.io.IOException;
 public interface AskService {
     // 게시판 목록 조회
     PageDTO<AskResponseDTO, PostSearchSpecs> getList(PostSearchSpecs postSearchSpecs, Pageable pageable) throws IOException;
+    // 게시판 상세
+    ResponseEntity<ApiResponseDTO<AskResponseDTO>> detailPost(Long id) throws IOException;
     // 게시판 등록
     ResponseEntity<ApiResponseDTO<AskCreateDTO>> createPost(AskCreateDTO askCreateDTO, Authentication authentication) throws IOException;
+    // 게시판 수정 권한 확인
+    ResponseEntity<ApiResponseDTO<?>> checkAuth(Long id, Authentication authentication) throws IOException;
     // 게시판 수정
-    ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updatePost(Long askId, AskUpdateDTO askUpdateDTO) throws IOException;
+    ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updatePost(Long askId, AskUpdateDTO askUpdateDTO, Authentication authentication) throws IOException;
     // 게시판 삭제 (게시물의 상태만 변경됨)
-    ResponseEntity<ApiResponseDTO<?>> deletePost(Long id) throws IOException;
+    ResponseEntity<ApiResponseDTO<?>> deletePost(Long id, Authentication authentication) throws IOException;
+    // 게시글 신고
+    ResponseEntity<ApiResponseDTO<?>> reportPost(Long id) throws IOException;
 }

@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
     // 기능 구현 중 에러 발생 예외처리
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponseDTO<?>> handleRuntimeException(RuntimeException e) {
-        log.error("서비스 중 서버 에러 발생 : {}", e.getMessage());
+        log.error("서비스 중 서버 에러 발생 : {}", e);
         ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -62,5 +62,13 @@ public class GlobalExceptionHandler {
         log.error("JWT 에러 발생 : {}", e.getMessage());
         ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
+    }
+
+    // 알 수 없는 에러
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponseDTO<?>> handleException(Exception e) {
+        log.error("알 수 없는 에러 발생 : {}", e);
+        ApiResponseDTO<?> exceptionResponse = new ApiResponseDTO<>(false, e.getMessage(), null);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

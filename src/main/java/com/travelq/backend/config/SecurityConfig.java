@@ -42,7 +42,7 @@ public class SecurityConfig {
 
                 // 요청 권한 설정
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/asks/list", "/api/user/", "/login/**").permitAll() // 로그인 없이 접근 가능한 URL은 permitAll로 명시
+                        .requestMatchers("/api/login", "/api/asks/list", "/api/asks/{id}", "/api/user/", "/login/**").permitAll() // 로그인 없이 접근 가능한 URL은 permitAll로 명시
                         .anyRequest().hasAnyRole("USER","ADMIN")) // 나머지 URL은 로그인(권한)이 필요함
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOauth2UserService))  // OAuth2 로그인 후 사용자 정보 처리

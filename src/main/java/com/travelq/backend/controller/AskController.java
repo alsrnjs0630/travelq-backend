@@ -34,24 +34,47 @@ public class AskController {
         return askService.getList(postSearchSpecs, pageable);
     }
 
+    // 게시글 상세페이지
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponseDTO<AskResponseDTO>> getAsk(@PathVariable long id) throws IOException {
+        log.info("질문 게시글 상세----------------------------------------------------------");
+        return askService.detailPost(id);
+    }
+
     // 게시글 등록
     @PostMapping("/")
-    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createAskPost(@RequestBody @Valid AskCreateDTO askCreateDTO, Authentication authentication) throws IOException {
+    public ResponseEntity<ApiResponseDTO<AskCreateDTO>> createAskPost(@RequestBody @Valid AskCreateDTO askCreateDTO,
+                                                                      Authentication authentication) throws IOException {
         log.info("질문 게시글 등록----------------------------------------------------------");
         return askService.createPost(askCreateDTO, authentication);
     }
 
+    // 게시판 수정 권한 체크
+    @GetMapping("/{id}/authcheck")
+    public ResponseEntity<ApiResponseDTO<?>> checkAuth(@PathVariable long id, Authentication authentication) throws IOException {
+        return askService.checkAuth(id, authentication);
+    }
+
     // 게시판 수정
-    @PutMapping("/{askId}")
-    public ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updateAskPost(@PathVariable Long askId, @RequestBody @Valid AskUpdateDTO askUpdateDTO) throws IOException {
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updateAskPost(@PathVariable Long id,
+                                                                      @RequestBody @Valid AskUpdateDTO askUpdateDTO,
+                                                                      Authentication authentication) throws IOException {
         log.info("질문 게시글 수정----------------------------------------------------------");
-        return askService.updatePost(askId, askUpdateDTO);
+        return askService.updatePost(id, askUpdateDTO, authentication);
     }
 
     // 게시글 삭제
-    @DeleteMapping("/{askId}")
-    public ResponseEntity<ApiResponseDTO<?>> deleteAskPost(@PathVariable Long askId) throws IOException {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponseDTO<?>> deleteAskPost(@PathVariable Long id, Authentication authentication) throws IOException {
         log.info("질문 게시글 삭제----------------------------------------------------------");
-        return askService.deletePost(askId);
+        return askService.deletePost(id, authentication);
+    }
+
+    // 게시글 신고
+    @PostMapping("/{id}/report")
+    public ResponseEntity<ApiResponseDTO<?>> reportAskPost(@PathVariable Long id) throws IOException {
+        log.info("질문 게시글 신고----------------------------------------------------------");
+        return askService.reportPost(id);
     }
 }

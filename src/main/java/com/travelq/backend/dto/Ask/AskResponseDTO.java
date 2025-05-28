@@ -1,17 +1,17 @@
 package com.travelq.backend.dto.Ask;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.travelq.backend.entity.Member;
+import com.travelq.backend.dto.AskCmt.AskCmtResponseDTO;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode
 public class AskResponseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -19,9 +19,6 @@ public class AskResponseDTO implements Serializable {
 
     // 게시글 아이디
     private Long id;
-
-    // 회원 아이디
-    private Long memberId;
 
     // 게시글 제목
     private String title;
@@ -34,6 +31,15 @@ public class AskResponseDTO implements Serializable {
 
     // 조회수
     private int viewCount;
+
+    // 신고수
+    private int reportCount;
+
+    // 게시글 상태
+    private String state;
+
+    // 게시글 댓글 목록
+    private List<AskCmtResponseDTO> cmts;
 
     // 작성일
     private LocalDateTime createdAt;

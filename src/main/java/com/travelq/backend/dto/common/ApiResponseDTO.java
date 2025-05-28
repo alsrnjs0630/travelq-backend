@@ -3,7 +3,7 @@ package com.travelq.backend.dto.common;
 import lombok.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ApiResponseDTO<T> {
