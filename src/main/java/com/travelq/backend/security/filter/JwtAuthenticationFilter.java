@@ -54,8 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             } catch (Exception e) {
                 // JWT 검증 실패 처리
                 log.error("인증되지 않은 토큰입니다 : ", e);
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
+                throw new JwtException("토큰이 만료되었습니다.");
             }
         }
         // 다음 필터로 넘김

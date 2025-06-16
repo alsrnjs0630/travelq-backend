@@ -3,7 +3,6 @@ package com.travelq.backend.mapper;
 import com.travelq.backend.dto.Ask.AskCreateDTO;
 import com.travelq.backend.dto.Ask.AskResponseDTO;
 import com.travelq.backend.dto.Ask.AskUpdateDTO;
-import com.travelq.backend.dto.AskCmt.AskCmtResponseDTO;
 import com.travelq.backend.entity.Ask;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

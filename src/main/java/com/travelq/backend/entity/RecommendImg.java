@@ -40,4 +40,9 @@ public class RecommendImg {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    // 이미지 삭제
+    public void deleteImage() {
+        this.isDeleted = true;
+    }
 }

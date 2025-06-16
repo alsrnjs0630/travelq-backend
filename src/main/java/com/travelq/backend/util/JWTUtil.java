@@ -21,7 +21,7 @@ public class JWTUtil {
     // 비밀키는 최소 256비트(32자) 이상이어야 합니다.
     @Value("${jwt.secret}")
     private String secretString;
-    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 1000 * 60 * 30L;
+    private static final long ACCESS_TOKEN_VALIDITY_MINUTES = 1L;
 
     // 서명(Signature)을 위한 Base64 인코딩
     private SecretKey secretKey;
@@ -43,7 +43,7 @@ public class JWTUtil {
                     .subject((String) claims.get("email"))
                     .claims(claims)
                     .issuedAt(Date.from(ZonedDateTime.now().toInstant()))
-                    .expiration(Date.from(ZonedDateTime.now().plusMinutes(ACCESS_TOKEN_VALIDITY_SECONDS).toInstant()))
+                    .expiration(Date.from(ZonedDateTime.now().plusMinutes(ACCESS_TOKEN_VALIDITY_MINUTES).toInstant()))
                     .signWith(secretKey, Jwts.SIG.HS256)
                     .compact();
         } catch (Exception e) {

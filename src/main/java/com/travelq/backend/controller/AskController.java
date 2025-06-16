@@ -36,7 +36,7 @@ public class AskController {
 
     // 게시글 상세페이지
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponseDTO<AskResponseDTO>> getAsk(@PathVariable long id) throws IOException {
+    public ResponseEntity<ApiResponseDTO<AskResponseDTO>> getAsk(@PathVariable Long id) throws IOException {
         log.info("질문 게시글 상세----------------------------------------------------------");
         return askService.detailPost(id);
     }
@@ -51,13 +51,13 @@ public class AskController {
 
     // 게시판 수정 권한 체크
     @GetMapping("/{id}/authcheck")
-    public ResponseEntity<ApiResponseDTO<?>> checkAuth(@PathVariable long id, Authentication authentication) throws IOException {
+    public ResponseEntity<ApiResponseDTO<?>> checkAuth(@PathVariable Long id, Authentication authentication) throws IOException {
         return askService.checkAuth(id, authentication);
     }
 
     // 게시판 수정
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updateAskPost(@PathVariable Long id,
+    public ResponseEntity<ApiResponseDTO<AskUpdateDTO>> updateAskPost(@PathVariable long id,
                                                                       @RequestBody @Valid AskUpdateDTO askUpdateDTO,
                                                                       Authentication authentication) throws IOException {
         log.info("질문 게시글 수정----------------------------------------------------------");

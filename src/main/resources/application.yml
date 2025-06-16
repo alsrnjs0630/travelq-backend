@@ -55,3 +55,6 @@ spring:
             user-name-attribute: response
 jwt:
   secret: TheOnlyTrueWisdomIsInKnowingYouKnowNothing@42!
+
+file:
+  rcmDir: D:\TravelQ\TravelQ_back_end\src\main\resources\static\uploads\recommends

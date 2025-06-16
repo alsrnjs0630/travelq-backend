@@ -1,7 +1,10 @@
-package com.travelq.backend.dto.AskCmt;
+package com.travelq.backend.dto.RecommendCmt;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,14 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
-@EqualsAndHashCode
-public class AskCmtRequestDTO implements Serializable {
+public class RcmCmtRequestDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    // 게시판 아이디
-    private Long askId;
-
+    // 추천 게시글 ID
+    private Long recommendId;
     // 댓글 내용
     @NotBlank(message = "댓글 내용을 입력해주세요.")
     private String content;

@@ -1,5 +1,6 @@
 package com.travelq.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.travelq.backend.util.commonCode.StatusCode;
 import com.travelq.backend.util.commonCode.StatusConverter;
 import jakarta.persistence.*;
